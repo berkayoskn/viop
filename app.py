@@ -54,7 +54,7 @@ app = Flask(__name__)
 @app.route("/")
 def index():
     daemon = VIOPScannerDaemon(capital_tl=100_000.0, risk_pct=1.5, margin_mode="psr")
-    all_reports, archive_dir = daemon.execute_viop_scan(demo_mode=True)
+    all_reports, archive_dir = daemon.execute_viop_scan(demo_mode=False)
     
     html_path = daemon.file_mgr.latest_dir / "viop_komuta_merkezi.html"
     if html_path.exists():
