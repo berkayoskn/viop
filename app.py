@@ -76,6 +76,11 @@ import os
 import re
 import sys
 import time
+import datetime as dt
+from zoneinfo import ZoneInfo
+
+# Türkiye Saat Dilimi (UTC+3) sabitleniyor
+TR_TZ = ZoneInfo("Europe/Istanbul")
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from dataclasses import dataclass, field
 from logging.handlers import RotatingFileHandler
