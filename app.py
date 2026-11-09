@@ -1,21 +1,3 @@
-from __future__ import annotations
-from flask import Flask, render_template_string
-
-app = Flask(__name__)
-
-@app.route("/")
-def index():
-    daemon = VIOPScannerDaemon(capital_tl=100_000.0, risk_pct=1.5, margin_mode="psr")
-    all_reports, archive_dir = daemon.execute_viop_scan(demo_mode=True)
-    
-    html_path = daemon.file_mgr.latest_dir / "viop_komuta_merkezi.html"
-    if html_path.exists():
-        return html_path.read_text(encoding="utf-8")
-    return "<h1>VİOP Quant-Pro v4.0 Komuta Merkezi Hazırlanıyor...</h1>"
-
-if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 5000))
-    app.run(host="0.0.0.0", port=port)
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
@@ -65,6 +47,23 @@ a
 """
 
 from __future__ import annotations
+from flask import Flask, render_template_string
+
+app = Flask(__name__)
+
+@app.route("/")
+def index():
+    daemon = VIOPScannerDaemon(capital_tl=100_000.0, risk_pct=1.5, margin_mode="psr")
+    all_reports, archive_dir = daemon.execute_viop_scan(demo_mode=True)
+    
+    html_path = daemon.file_mgr.latest_dir / "viop_komuta_merkezi.html"
+    if html_path.exists():
+        return html_path.read_text(encoding="utf-8")
+    return "<h1>VİOP Quant-Pro v4.0 Komuta Merkezi Hazırlanıyor...</h1>"
+
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)
 
 import argparse
 import dataclasses
